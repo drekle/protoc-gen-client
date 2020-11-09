@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+import "google/protobuf/descriptor.proto";
+
+message CommandOptions {
+    string path = 1;
+}
+
+message ClientOptions {
+    string repository = 1;
+}
+
+extend google.protobuf.MethodOptions {
+    CommandOptions command_options = 50001;
+}
+
+extend google.protobuf.FileOptions {
+    ClientOptions client_options = 50001;
+}
