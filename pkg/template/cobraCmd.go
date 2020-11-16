@@ -1,7 +1,7 @@
 package template
 
 import (
-	protochelpers "github.com/drekle/protoc-gen-client/pkg/protoc"
+	protochelpers "github.com/drekle/protoc-gen-client/pkg/option"
 )
 
 type CobraCommandInput struct {
