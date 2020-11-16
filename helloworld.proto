@@ -1,8 +1,12 @@
 syntax = "proto3";
 
-import "option.proto";
+import "pkg/option/option.proto";
 
 option go_package = "github.com/drekle/my-go-package";
+
+option (client_options) = {
+  repository: "github.com/drekle/example"
+};
 
 package myPackage;
 
@@ -12,10 +16,10 @@ service MyService {
   // Procedure Examples
 
   // protoc-gen-client:cmd="unary":something
-  rpc Unary (ExampleRequest) returns (ExampleResponse) {}
+  // rpc Unary (ExampleRequest) returns (ExampleResponse) {}
 
   rpc UnaryClientStream (stream ExampleRequest) returns (ExampleResponse) {
-    option (client_options) = {
+    option (command_options) = {
       path: "unary stream"
     };
   }
