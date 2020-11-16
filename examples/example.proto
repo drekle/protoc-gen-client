@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+import "pkg/option/option.proto";
+
+option go_package = "github.com/drekle/my-go-package";
+
+option (client_options) = {
+  repository: "github.com/drekle/example"
+};
+
+package myPackage;
+
+  // Service Example
+service MyService {
+
+  // Procedure Examples
+
+  // protoc-gen-client:cmd="unary":something
+  // rpc Unary (ExampleRequest) returns (ExampleResponse) {}
+
+  rpc UnaryClientStream (stream ExampleRequest) returns (ExampleResponse) {
+    option (command_options) = {
+      path: "unary stream"
+    };
+  }
+
+  // protoc-gen-client:cmd="unary watch":something
+  rpc UnaryServerStream (ExampleRequest) returns (stream ExampleResponse) {}
+
+  // protoc-gen-client:cmd="unary stream watch":something
+  rpc UnaryBidiStream (stream ExampleRequest) returns (stream ExampleResponse) {}
+}
+
+// Leading Request Message Comments
+message ExampleRequest {
+  string name = 1;
+  int64 age = 2;
+  /*
+  Field Block Comments
+  */
+  float price = 3;
+  // Leading Field Comments
+  bytes data = 4;
+}
+
+/*
+Leading Response Message Block Comments
+*/
+message ExampleResponse {
+  // Leading Nested Message Comments
+  message nested {
+    string name = 1;
+  }
+}
